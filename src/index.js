@@ -1,5 +1,5 @@
 const plugin = require('tailwindcss/plugin');
-const { util } = require('./utils');
+const getTheme = require('./utils');
 
 module.exports = plugin(({ addComponents, theme }) => {
   const hljs = theme('hljs', {});
@@ -8,7 +8,7 @@ module.exports = plugin(({ addComponents, theme }) => {
     hljs.theme = 'default';
   }
 
-  const hljsTheme = util.getTheme(hljs.theme);
+  const hljsTheme = getTheme(hljs.theme);
 
   addComponents(hljsTheme);
 });
