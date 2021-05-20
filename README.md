@@ -20,6 +20,12 @@ Then, initialize the plugin:
 // tailwind.config.js
 
 module.exports = {
+  purge: {
+    content: ['./src/**/*.html'],
+    options: {
+      safelist: [/hljs+/],
+    },
+  },
   theme: {},
   variants: {},
   plugins: [require('tailwind-highlightjs')],
@@ -27,6 +33,27 @@ module.exports = {
 ```
 
 > If you don't pass any options, the plugin uses the default theme for highlight.js.
+
+## Don't Get Purged
+
+Tailwind automatically purges your unused css when you build for production. That means all of the Highlight.js theme styles would be purged unless you tell purgecss not to. To that pass an `options` object to your purge settings in `tailwind.config.js`. Then safelist the theme classes using a regex like this:
+
+```js
+// tailwind.config.js
+
+module.exports = {
+  purge: {
+    content: [
+      /** content path globs */
+    ],
+    options: {
+      safelist: [/hljs+/],
+    },
+  },
+};
+```
+
+> This will preserve all classes beginning with `hljs`.
 
 ## Configuration
 
