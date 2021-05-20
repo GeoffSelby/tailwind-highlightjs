@@ -8,7 +8,9 @@ First, install with NPM or Yarn:
 
 ```bash
 npm install tailwind-highlightjs
-// or
+
+## or
+
 yarn add tailwind-highlightjs
 ```
 
@@ -59,3 +61,87 @@ module.exports = {
   plugins: [require('tailwind-highlightjs')],
 };
 ```
+
+### Custom Themes
+
+This plugin also allows you to create a custom theme.
+
+```js
+// tailwind.config.js
+
+module.exports = {
+  theme: {
+    hljs: {
+      custom: {
+        base: {
+          background: '#011627',
+          color: '#d6deeb',
+        },
+        general: {
+          keyword: {
+            color: '#c792ea',
+            fontStyle: 'italic',
+          },
+          built_in: {
+            color: '#addb67',
+            fontStyle: 'italic',
+          },
+          // other general styles
+        },
+        meta: {
+          // meta styles
+        },
+        tags: {
+          // tags, attributes, configs styles
+        },
+        text: {
+          // text markup styles
+        },
+        css: {
+          // css styles
+        },
+        templates: {
+          // templates styles
+        },
+        diff: {
+          // diff styles
+        },
+      },
+    },
+  },
+  plugins: [require('tailwind-highlightjs')],
+};
+```
+
+> The data structure is broken up into sections based on the official [hightlight.js css class reference](https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html). I highly recommend checking it out to learn more about custom themes.
+
+#### Customizing another theme
+
+Sometimes you may want to simply customize an existing theme. This plugin makes it as simple as can be. All you have to do is provide your custom styles along with the theme you want to customize.
+
+```js
+// tailwind.config.js
+
+module.exports = {
+  theme: {
+    hljs: {
+      theme: 'night-owl',
+      custom: {
+        general: {
+          type: {
+            fontStyle: 'italic',
+          },
+          // other customizations
+        },
+      },
+    },
+  },
+  plugins: [require('tailwind-highlightjs')],
+};
+```
+
+This will merge your customizations with the theme you provide, overwriting any conflicting styles with your customizations.
+
+## License
+
+Tailwind Highlight.js Plugin is open-sourced software licensed under the [MIT license](LICENSE.md).

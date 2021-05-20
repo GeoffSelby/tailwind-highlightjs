@@ -8,7 +8,7 @@ module.exports = plugin(({ addComponents, theme }) => {
     hljs.theme = 'default';
   }
 
-  const hljsTheme = getTheme(hljs.theme);
+  const hljsTheme = getTheme(hljs.theme, hljs.custom);
 
   addComponents(hljsTheme);
 });

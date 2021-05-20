@@ -1,13 +1,64 @@
 const fs = require('fs');
 const path = require('path');
 const fetch = require('sync-fetch');
+const merge = require('lodash.merge');
 const convertCss = require('./converter');
 
-module.exports = function getTheme(theme) {
+module.exports = function getTheme(theme = null, custom = null) {
+  let themeContents = {};
+  let customTheme = {};
+
+  if (theme) {
+    themeContents = findTheme(theme);
+  }
+
+  if (custom) {
+    customTheme = generateCustomTheme(custom);
+  }
+
+  return merge(themeContents, customTheme);
+};
+
+function findTheme(theme) {
   return isThemeOfficial(theme)
     ? getOfficialTheme(theme)
     : getThemeFromLink(theme);
-};
+}
+
+function generateCustomTheme(custom) {
+  let baseStyles = {};
+  let customStyles = {};
+
+  if (custom.base) {
+    baseStyles = generateBaseStyles(custom.base);
+  }
+
+  Object.entries(custom).forEach(([key, value]) => {
+    if (key !== 'base') {
+      Object.entries(value).forEach(([key, value]) => {
+        customStyles[`.hljs-${key}`] = value;
+      });
+    }
+  });
+
+  return merge(baseStyles, customStyles);
+}
+
+function generateBaseStyles(baseStyles) {
+  const base = {
+    '.hljs': {
+      display: 'block',
+      overflowX: 'auto',
+      padding: '0.5em',
+    },
+  };
+
+  const merged = merge(base['.hljs'], baseStyles);
+
+  return {
+    '.hljs': Object.assign(merged, {}),
+  };
+}
 
 function isThemeOfficial(theme) {
   const pattern = new RegExp(
