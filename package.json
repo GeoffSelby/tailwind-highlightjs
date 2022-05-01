@@ -1,6 +1,6 @@
 {
   "name": "tailwind-highlightjs",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Bake highlight.js themes directly in your Tailwind Css build",
   "main": "src/index.js",
   "directories": {
