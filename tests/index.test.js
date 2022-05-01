@@ -13,6 +13,11 @@ describe('highlight.js plugin', () => {
 
     return postcss(
       tailwindcss({
+        safelist: [
+          {
+            pattern: /hljs+/,
+          },
+        ],
         corePlugins: false,
         plugins: [tailwindHighlight],
       }),
@@ -34,6 +39,11 @@ describe('highlight.js plugin', () => {
 
     return postcss(
       tailwindcss({
+        safelist: [
+          {
+            pattern: /hljs+/,
+          },
+        ],
         corePlugins: false,
         theme: {
           hljs: {
@@ -62,6 +72,11 @@ describe('highlight.js plugin', () => {
 
     return postcss(
       tailwindcss({
+        safelist: [
+          {
+            pattern: /hljs+/,
+          },
+        ],
         corePlugins: false,
         theme: {
           hljs: {
@@ -88,6 +103,11 @@ describe('highlight.js plugin', () => {
 
     return postcss(
       tailwindcss({
+        safelist: [
+          {
+            pattern: /hljs+/,
+          },
+        ],
         corePlugins: false,
         theme: {
           hljs: {
@@ -142,6 +162,11 @@ describe('highlight.js plugin', () => {
 
     return postcss(
       tailwindcss({
+        safelist: [
+          {
+            pattern: /hljs+/,
+          },
+        ],
         corePlugins: false,
         theme: {
           hljs: {
