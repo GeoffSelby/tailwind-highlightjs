@@ -20,12 +20,10 @@ Then, initialize the plugin:
 // tailwind.config.js
 
 module.exports = {
-  purge: {
-    content: ['./src/**/*.html'],
-    options: {
-      safelist: [/hljs+/],
-    },
-  },
+  content: ['./src/**/*.html'],
+  safelist: [{
+    pattern: /hljs+/,
+  }],
   theme: {},
   variants: {},
   plugins: [require('tailwind-highlightjs')],
@@ -36,20 +34,17 @@ module.exports = {
 
 ## Don't Get Purged
 
-Tailwind automatically purges your unused css when you build for production. That means all of the Highlight.js theme styles would be purged unless you tell purgecss not to. To that pass an `options` object to your purge settings in `tailwind.config.js`. Then safelist the theme classes using a regex like this:
+Tailwind's JIT compiler will only generate css for classes used in your content by default. To ensure your Higlight.js theme styles are generated, you need to be sure to add them to the `safelist`. The easiest way to do that is by adding a regex pattern like the example below.
 
 ```js
 // tailwind.config.js
 
 module.exports = {
-  purge: {
-    content: [
-      /** content path globs */
-    ],
-    options: {
-      safelist: [/hljs+/],
-    },
-  },
+  content: ['./src/**/*.html'],
+  safelist: [{
+    pattern: /hljs+/,
+  }],
+  ...
 };
 ```
 
@@ -65,6 +60,10 @@ To use an official theme:
 // tailwind.config.js
 
 module.exports = {
+  content: ['./src/**/*.html'],
+  safelist: [{
+    pattern: /hljs+/,
+  }],
   theme: {
     hljs: {
       theme: 'night-owl',
@@ -80,6 +79,10 @@ Using a third-party theme is just as simple. Just pass the link to the raw css f
 // tailwind.config.js
 
 module.exports = {
+  content: ['./src/**/*.html'],
+  safelist: [{
+    pattern: /hljs+/,
+  }],
   theme: {
     hljs: {
       theme: 'https://example.com/my-awesome-theme.css',
@@ -97,6 +100,10 @@ This plugin also allows you to create a custom theme.
 // tailwind.config.js
 
 module.exports = {
+  content: ['./src/**/*.html'],
+  safelist: [{
+    pattern: /hljs+/,
+  }],
   theme: {
     hljs: {
       custom: {
@@ -150,6 +157,10 @@ Sometimes you may want to simply customize an existing theme. This plugin makes 
 // tailwind.config.js
 
 module.exports = {
+  content: ['./src/**/*.html'],
+  safelist: [{
+    pattern: /hljs+/,
+  }],
   theme: {
     hljs: {
       theme: 'night-owl',
