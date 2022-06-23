@@ -74,8 +74,8 @@ function isThemeOfficial(theme) {
 }
 
 function getOfficialTheme(theme) {
-  const themePath = path.resolve(
-    `${__dirname}/../node_modules/highlight.js/styles/${theme}.css`,
+  const themePath = path.join(
+      __dirname, "../..", `highlight.js/styles/${theme}.css`,
   );
   const themeContents = fs.readFileSync(themePath, 'utf8');
 
