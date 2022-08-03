@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const appRoot = require('app-root-path');
 const fetch = require('sync-fetch');
 const merge = require('lodash.merge');
 const convertCss = require('./converter');
@@ -75,7 +76,7 @@ function isThemeOfficial(theme) {
 
 function getOfficialTheme(theme) {
   const themePath = path.resolve(
-    `${__dirname}/../node_modules/highlight.js/styles/${theme}.css`,
+    `${appRoot}/node_modules/highlight.js/styles/${theme}.css`,
   );
   const themeContents = fs.readFileSync(themePath, 'utf8');
 
